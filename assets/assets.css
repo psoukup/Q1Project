@@ -162,3 +162,28 @@ h2 {
   text-decoration: underline;
   font-size: 40px;
 }
+
+.formwrapper {
+  background-color: navy;
+  height: 200px;
+  padding: 10px;
+  width: 300px;
+  color: grey;
+  float: left
+  font-family: 'Quicksand', sans-serif;
+  font-size: 15px;
+}
+.formitems {
+  padding: 10px;
+  margin: 5px;
+  display: inline-flex;
+  float: right;
+  font-family: 'Quicksand', sans-serif;
+}
+label {
+  text-align: left;
+  float: left;
+  display: inline;
+  font-family: 'Quicksand', sans-serif;
+  left: 0px;
+}
