@@ -12,6 +12,7 @@ th p {
   color: #0074D9;
   font-size: 40px;
   text-align: center;
+  margin: 0px;
 }
 td {
   height: 160px;
@@ -25,4 +26,11 @@ td {
   background-color: #ADD8E6;
   border: solid 0.5px white;
 
+}
+.weathersmall {
+  font-size: 15px;
+  float: right;
+  position: absolute;
+  left: 30%;
+  top: 20%;
 }

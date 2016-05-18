@@ -1,7 +1,21 @@
 $(function() {
     var year = 2016;
+    var daysinmonth = [];
+    function leapYear(year) {
+      if (year % 4 === 0 && year % 100 != 0 || year % 400 === 0) {
+        daysinmonth[2] === 29;
+      } else {
+        daysinmonth[2] === 28;
+      }
+    }
+    leapYear(year);
+
     var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-    var jan2016 = new Date(2016, 0, 01)
+    var daysinmonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    // var arrayDays = ['mondy']
+    // $('.'+days[day])
+    leapYear(year);
+    var jan2016 = new Date(2016, 01, 01)
     var p = jan2016.getMonth();
     var weekday = jan2016.getDay();
     console.log(p)
@@ -13,8 +27,9 @@ $(function() {
         $(this).append("<div class='ribbon'></div>");
         $('ribbon').addClass("ribbon");
     });
-    $('.ribbon').on("click", function() {
+    $('th').on("click", function() {
         console.log('clicked');
+        $('.ribbon').css("background-color", "green")
         $(this).append("<form type='text' class='todo'></form>");
     });
 
@@ -41,6 +56,12 @@ $(function() {
         console.log(year)
         $(".month").text(months[p] + " " + year);
     })
+
+
+    for ( var i = 1; i <= daysinmonth[p]; i++) {
+    $('td').append("<p>" + i + "</p>")
+    }
+
 
     var datestring = $(".month").text();
     console.log(datestring)
@@ -92,17 +113,22 @@ $(function() {
     //   }
     //   console.log(weekday)
     // })
-    var zipcode = $('#zipcode').text()
+    $('#zipcode').on("click", function() {
+      console.log("clikzzzz");
+      console.log($('#zipcode').val())
+    });
+    var zipcode = ($('#zipcode').val());
     // zipcode = 88888;
-    console.log(zipcode)
+    // console.log(zipcode)
     $.ajax({
-      url: "http://api.openweathermap.org/data/2.5/weather?zip=" + zipcode + ",us&APPID=b3df5655b9b91983bf112d6eef2da821",
+      url: "http://api.openweathermap.org/data/2.5/weather?zip=" + ($('#zipcode').val()) + ",us&APPID=b3df5655b9b91983bf112d6eef2da821",
       method: "get",
       success: function(data) {
         var skys = data.weather[0].main
         var kelvin = data.main.temp;
         var farenheight = Math.round(1.8 * (kelvin - 273) + 32)
         console.log("Current temperature: " + farenheight + ", " + "current conditions: " + skys)
+        $('th').append("<p class='weathersmall'>Current temperature: " + farenheight + ", " + "Current conditions: " + skys + "</p>")
       }
     })
 })
