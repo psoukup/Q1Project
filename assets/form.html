@@ -3,23 +3,17 @@
   <head>
     <meta charset="utf-8">
     <title>Form</title>
-    <link rel="stylesheet" type="text/css" href="assets.css" >
+    <link rel="stylesheet" type="text/css" href="form.css" >
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
   </head>
   <body>
-    <div class="formwrapper container">
+    <div class="formwrapper container col-lg-4">
       <form action="#" method="GET">
-        <label for="notes">Notes: </label>
-        <input type="textarea" name="notes" class="formitems"> <br>
-
-        <label for="date">Date: </label>
-        <input type="date" name="date" class="formitems"> <br>
-
+        <label for="notes" class="col-lg-4">Activity: </label>
+        <input type="text" name="notes" class="formitems col-lg-4"> <br>
         <br>
-
-        <label for="time">Time: </label>
-        <input type="time" name="time" class="formitems"> <br>
-        
+        <label for="time" class="col-lg-4">Time: </label>
+        <input type="time" name="time" class="formitems col-lg-4"> <br>
         <br>
       </div>
   </body>
