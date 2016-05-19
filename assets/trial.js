@@ -1,8 +1,8 @@
 $(function() {
     var year = 2016;
     var daysinmonth = [];
-
-//Setting the leapYear
+    var p;
+//Function for leap years
     function leapYear(year) {
         if (year % 4 === 0 && year % 100 != 0 || year % 400 === 0) {
             daysinmonth[2] === 29;
@@ -13,44 +13,42 @@ $(function() {
     leapYear(year);
 
 //array data for number of days per month, months per year, and days of the week
+
     var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
     var daysinmonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
     var arrayDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 
 
-//formula to
-    $('.monday').append('<p>' + arrayDays[0] + '</p>');
-    $('.tuesday').append('<p>' + arrayDays[1] + '</p>');
-    $('.wednesday').append('<p>' + arrayDays[2] + '</p>');
-    $('.thursday').append('<p>' + arrayDays[3] + '</p>');
-    $('.friday').append('<p>' + arrayDays[4] + '</p>');
-    $('.saturday').append('<p>' + arrayDays[5] + '</p>');
+//formula to append days of the week to calendar -- need to get them in a header
+
+    $('.sunday').append('<p>' + arrayDays[0] + '</p>');
+    $('.monday').append('<p>' + arrayDays[1] + '</p>');
+    $('.tuesday').append('<p>' + arrayDays[2] + '</p>');
+    $('.wednesday').append('<p>' + arrayDays[3] + '</p>');
+    $('.thursday').append('<p>' + arrayDays[4] + '</p>');
+    $('.friday').append('<p>' + arrayDays[5] + '</p>');
+    $('.saturday').append('<p>' + arrayDays[6] + '</p>');
     console.log(arrayDays[0])
 
 //Calling the leapYear function
 
     leapYear(year);
 
-//Initializing calendar app date
-    var jan2016 = new Date(2016, 01, 01)
+//Initializing calendar app date & calculates the amount of days in month with var p
+
+    var jan2016 = new Date(2016, 00, 01)
     var p = jan2016.getMonth();
     var weekday = jan2016.getDay();
     console.log(p)
 
 //Buttons that append the year and month when clicked left to right
-    $("th").append("<span><button type='button' id='left' class='btn glyphicon glyphicon-chevron-left'></button>" + " " + "<p class='month'> " + months[p] + " " + year + "</p>" + " <span><button type='button' id='right' class='btn glyphicon glyphicon-chevron-right'></button>")
 
-    $('td').on("click", function() {
-        $(this).append("<div class='ribbon'></div>");
-        $('ribbon').addClass("ribbon");
-    });
-    $('th').on("click", function() {
-        console.log('clicked');
-        $('.ribbon').css("background-color", "green")
-        $(this).append("<form type='text' class='todo'></form>");
-    });
+    $(".datez").append("<span><button type='button' id='left' class='btn glyphicon glyphicon-chevron-left'></button>" + " " + "<p class='months'> " + months[p] + " " + year + "</p>" + " <span><button type='button' id='right' class='btn glyphicon glyphicon-chevron-right'></button>")
+
+
 
 //Formulas to get the proper month data
+
     $('#right').on("click", function() {
         if (p < 11) {
             p += 1;
@@ -60,7 +58,7 @@ $(function() {
         }
         console.log(p);
         console.log(year);
-        $(".month").text(months[p] + " " + year);
+        $(".months").text(months[p] + " " + year);
     });
     $('#left').on("click", function() {
             if (p > 0 && p < 12) {
@@ -72,17 +70,53 @@ $(function() {
             }
             console.log(p)
             console.log(year)
-            $(".month").text(months[p] + " " + year);
+            $(".months").text(months[p] + " " + year);
         })
 
 
 //Formula to add (numbers) days to each box in the table
+      var count = 0;
+      p = p
     for (var i = 1; i <= daysinmonth[p]; i++) {
-        $('td').append("<p>" + i + "</p>")
+      if (count < 7) {
+        $('.one').append("<td>" + "<p>" + i + "</p></td>")
+         count += 1;
+      }
+
+      else if (count >= 7 && count < 14){
+        $('.two').append("<td>" + "<p>" + i + "</p></td>")
+        count += 1;
+      }
+      else if (count >= 14 && count < 21){
+        $('.three').append("<td>" + "<p>" + i + "</p></td>")
+        count += 1;
+      }
+
+      else if (count >= 21 && count < 28){
+        $('.four').append("<td>" + "<p>" + i + "</p></td>")
+        count += 1;
+      }
+      else if (count >= 28 && count <= daysinmonth[p]){
+        $('.five').append("<td>" + "<p>" + i + "</p></td>")
+        count += 1;
+      }
     }
 
 
+//Adding todo items to each day
+
+    $('td').on("dblclick", function() {
+        $(this).append("<div class='ribbon'></div>");
+        $('ribbon').addClass("ribbon");
+    });
+    $('.ribbon').on("click", function() {
+        $(this).css("background-color", "yellow");
+    });
+
+
+
 //test to see if zipcode textbox was working - it isnt yet
+
     $('#zipcode').on("click", function() {
         console.log("clikzzzz");
         console.log($('#zipcode').val())
@@ -94,7 +128,7 @@ $(function() {
 
     // zipcode = 88888;
     // console.log(zipcode)
-    
+
     $.ajax({
         url: "http://api.openweathermap.org/data/2.5/weather?zip=" + ($('#zipcode').val()) + ",us&APPID=b3df5655b9b91983bf112d6eef2da821",
         method: "get",
