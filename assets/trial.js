@@ -45,7 +45,7 @@ $(function() {
 
     //Buttons that append the year and month when clicked left to right
 
-    $(".datez").append("<span><button type='button' id='left' class='btn glyphicon glyphicon-chevron-left'></button>" + " " + "<p class='months'> " + months[p] + " " + year + "</p>" + " <span><button type='button' id='right' class='btn glyphicon glyphicon-chevron-right'></button>")
+    $(".datez").append("<span><button type='button' id='left' class='btn glyphicon glyphicon-chevron-left btn-primary'></button>" + " " + "<p class='months'> " + months[p] + " " + year + "</p>" + " <span><button type='button' id='right' class='btn glyphicon glyphicon-chevron-right'></button>")
 
 
 
@@ -78,6 +78,7 @@ $(function() {
     })
 
 
+
     //Formula to add (numbers) days to each box in the table
     function drawDays(monthdays, month){
 
@@ -95,10 +96,10 @@ $(function() {
         count += 1;
       }
       var day = 1;
-      for (var i = startingDay; i <= monthdays; i++) {
+      for (var i = 1; i <= monthdays; i++) {
         console.log(day);
           if (count < 7) {
-              $('.one').append("<td>" + "<p>" + day + "</p></td>")
+              $('.one').append("<td class='click'>" + "<p>" + day + "</p></td>")
               count += 1;
           } else if (count >= 7 && count < 14) {
               $('.two').append("<td>" + "<p>" + day + "</p></td>")
@@ -112,24 +113,17 @@ $(function() {
           } else if (count >= 28 && count < 35) {
               $('.five').append("<td>" + "<p>" + day + "</p></td>")
               count += 1;
+          } else if (count >= 35 && count < 38) {
+              $('.six').append("<td>" + "<p>" + day + "</p></td>")
+              count += 1;
           }
           day ++;
       }
     }
 
-    function clearCalendar(){
-      $('.one').empty();
-      $('.two').empty();
-      $('.three').empty();
-      $('.four').empty();
-      $('.five').empty();
-    }
-
-
-
     //Adding todo items to each day
 
-    $('td').on("dblclick", function() {
+    $('.click').on("click", function() {
         $(this).append("<div class='ribbon'></div>");
         $('ribbon').addClass("ribbon");
     });
@@ -137,24 +131,36 @@ $(function() {
         $(this).css("background-color", "yellow");
     });
 
+    //clears the tds that were added from prior month
+
+    function clearCalendar(){
+      $('.one').empty();
+      $('.two').empty();
+      $('.three').empty();
+      $('.four').empty();
+      $('.five').empty();
+      $('.six').empty();
+    }
 
 
-    //test to see if zipcode textbox was working - it isnt yet
+    //test to see if zipcode textbox was working - it isnt yet but is console logging
 
+    var zipcode = null;
     $('#zipcode').on("click", function() {
-        console.log("clikzzzz");
         console.log($('#zipcode').val())
     });
 
     //AJAX call for weather from text form asking zip code input
 
-    var zipcode = ($('#zipcode').val());
+    $('#zipcode').on("click", function() {
+      zipcode = ($('#zipcode').val());
+  });
 
     // zipcode = 88888;
     // console.log(zipcode)
 
     $.ajax({
-        url: "http://api.openweathermap.org/data/2.5/weather?zip=" + zipcode.toString() + ",us&APPID=b3df5655b9b91983bf112d6eef2da821",
+        url: "http://api.openweathermap.org/data/2.5/weather?zip=" + zipcode + ",us&APPID=b3df5655b9b91983bf112d6eef2da821",
         method: "get",
         success: function(data) {
             var skys = data.weather[0].main

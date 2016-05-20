@@ -17,6 +17,9 @@ th p {
   text-align: center;
   margin: 0px;
 }
+.months {
+  font-size: 30px;
+}
 td {
   height: 100px;
   width: 200px;
@@ -45,7 +48,34 @@ td {
   height: 100px;
   font-size: 20px;
 }
-
+.sunday {
+  background-color: #ffffff;
+  height: 50px;
+}
+.monday {
+  background-color: #ffffff;
+  height: 50px;
+}
+.tuesday {
+  background-color: #ffffff;
+  height: 50px;
+}
+.wednesday {
+  background-color: #ffffff;
+  height: 50px;
+}
+.thursday {
+  background-color: #ffffff;
+  height: 50px;
+}
+.friday {
+  background-color: #ffffff;
+  height: 50px;
+}
+.saturday {
+  background-color: #ffffff;
+  height: 50px;
+}
 td {
   position: relative;
   font-size: 20px;
@@ -56,17 +86,15 @@ td {
   margin: 1px;
   align-content: center;
 }
-#left {
+span #left {
   float: left;
   display: flex;
-  align-content: space-around;
-  postion: relative;
-  bottom: 0px;
+  align-content: space-between;
 }
 #right {
   float: right;
   display: flex;
-  align-content: space-around;
+  align-content: space-between;
 }
 td p {
   text-align: left;
