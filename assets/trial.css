@@ -86,10 +86,11 @@ td {
   margin: 1px;
   align-content: center;
 }
-span #left {
+
+#left {
   float: left;
   display: flex;
-  align-content: space-between;
+  align-self: center;
 }
 #right {
   float: right;
@@ -112,4 +113,9 @@ form {
 }
 .grey {
   background-color: #DDDDDD;
+}
+span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

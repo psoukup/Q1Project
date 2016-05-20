@@ -45,7 +45,7 @@ $(function() {
 
     //Buttons that append the year and month when clicked left to right
 
-    $(".datez").append("<span><button type='button' id='left' class='btn glyphicon glyphicon-chevron-left btn-primary'></button>" + " " + "<p class='months'> " + months[p] + " " + year + "</p>" + " <span><button type='button' id='right' class='btn glyphicon glyphicon-chevron-right'></button>")
+    $(".datez").append("<span><button type='button' id='left' class='btn glyphicon glyphicon-chevron-left btn-primary'>&#8592;</button><p class='months'>" + months[p] + " " + year + "</p><button type='button' id='right' class='btn glyphicon glyphicon-chevron-right'>&#8594;</button></span>")
 
 
 
@@ -146,28 +146,27 @@ $(function() {
     //test to see if zipcode textbox was working - it isnt yet but is console logging
 
     var zipcode = null;
-    $('#zipcode').on("click", function() {
-        console.log($('#zipcode').val())
-    });
 
     //AJAX call for weather from text form asking zip code input
 
-    $('#zipcode').on("click", function() {
+    $('#zipcode').on("keypress", function(e) {
+      if (e.which == 13)
       zipcode = ($('#zipcode').val());
-  });
-
-    // zipcode = 88888;
-    // console.log(zipcode)
-
-    $.ajax({
+      $.ajax({
         url: "http://api.openweathermap.org/data/2.5/weather?zip=" + zipcode + ",us&APPID=b3df5655b9b91983bf112d6eef2da821",
         method: "get",
         success: function(data) {
-            var skys = data.weather[0].main
-            var kelvin = data.main.temp;
-            var farenheight = Math.round(1.8 * (kelvin - 273) + 32)
-            console.log("Current temperature: " + farenheight + ", " + "current conditions: " + skys)
-            $('th').append("<p class='weathersmall'>Current temperature: " + farenheight + ", " + "Current conditions: " + skys + "</p>")
+          $('.weathersmall').empty();
+          var skys = data.weather[0].main
+          var kelvin = data.main.temp;
+          var farenheight = Math.round(1.8 * (kelvin - 273) + 32)
+          console.log("Current temperature: " + farenheight + ", " + "current conditions: " + skys)
+          $('th').append("<p class='weathersmall'>Current temperature: " + farenheight + ", " + "Current conditions: " + skys + "</p>")
         }
-    })
+      })
+  });
+
+    // zipcode = 88888;
+    console.log(zipcode)
+
 })
