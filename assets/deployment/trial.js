@@ -123,13 +123,13 @@ $(function() {
 
     //Adding todo items to each day
 
-    $('.click').on("click", function() {
+    $('table').on("click","td", function() {
         $(this).append("<div class='ribbon'></div>");
         $('ribbon').addClass("ribbon");
     });
-    $('.ribbon').on("click", "this", function() {
-        $(this).css("background-color", "yellow");
-    });
+    // $('.ribbon').on("click", function() {
+    //     $(this).css("background-color", "yellow");
+    // });
 
     //clears the tds that were added from prior month
 
