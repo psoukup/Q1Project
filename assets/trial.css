@@ -1,6 +1,8 @@
+
 table {
   border: 5px solid #0074D9;
   background-color: #DDDDDD;
+  font-family: 'Quicksand', sans-serif;
 }
 th {
   height: 100px;
@@ -26,15 +28,15 @@ td {
   height: 20px;
   background-color: #ADD8E6;
   border: solid 0.5px white;
-
 }
 .weathersmall {
-  font-size: 15px;
+  font-size: 10px;
   float: right;
   position: absolute;
   left: 25%;
   right:25%;
-  top: 20%;
+  top: 15%;
+  font-family: 'Quicksand', sans-serif;
 }
 
 .weekdays {
@@ -58,6 +60,8 @@ td {
   float: left;
   display: flex;
   align-content: space-around;
+  postion: relative;
+  bottom: 0px;
 }
 #right {
   float: right;
@@ -70,4 +74,14 @@ td p {
   top: 0px;
   left: 0px;
   color: #0074D9;
+  font-family: 'Quicksand', sans-serif;
+}
+form {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  float: right;
+}
+.grey {
+  background-color: #DDDDDD;
 }

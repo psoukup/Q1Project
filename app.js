@@ -1,24 +1,43 @@
 $(function() {
-    var year = 2019;
-    var data = { months: ['', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'], days: [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ] }
+    var year = 2016;
+    var daysinmonth = [];
+    var p;
 
-    var monthAndYear = (data.months[6] + " " + year).toString();
-
-      $("<h1>" + monthAndYear + "</h1>").appendTo(".heading");
-
-      // for (var i = 1; i <= data.days[4]; i++) {
-
-      for (var i = 2; i < 36; i++) {
-        $("<div class='date'>" + "<p></p></div>").appendTo($(".secondarycontainer"));
-
-      }
-
-      // }
+    //Function for leap years
+    function leapYear(year) {
+        if (year % 4 === 0 && year % 100 != 0 || year % 400 === 0) {
+            daysinmonth[2] === 29;
+        } else {
+            daysinmonth[2] === 28;
+        }
+    }
+    leapYear(year);
 
 
+    //array data for number of days per month, months per year, and days of the week
+
+    var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+    var daysinmonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    var arrayDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+
+
+    //formula to append days of the week to calendar -- need to get them in a header
+
+    $('.sunday').append("<p>" + arrayDays[0] + "</p>");
+    $('.monday').append("<p>" + arrayDays[1] + "</p>");
+    $('.tuesday').append("<p>" + arrayDays[2] + "</p>");
+    $('.wednesday').append("<p>" + arrayDays[3] + "</p>");
+    $('.thursday').append("<p>" + arrayDays[4] + "</p>");
+    $('.friday').append("<p>" + arrayDays[5] + "</p>");
+    $('.saturday').append("<p>" + arrayDays[6] + "</p>");
+
+
+    $(".datez").append("<span><button type='button' id='left' class='btn glyphicon glyphicon-chevron-left'></button>" + " " + "<p class='months'> " + months[p] + " " + year + "</p>" + " <span><button type='button' id='right' class='btn glyphicon glyphicon-chevron-right'></button>")
+
+
+    //adding ribbon datestring
     $(".date").on("click", function() {
-        $(this).append("<div class='ribbon'></div>");
-
+        $(this).append("<div class='ribbon'><p></p></div>");
     })
     $("p").on("click", function() {
         $(".ribbon").css("background-color", "green");
@@ -27,60 +46,29 @@ $(function() {
         $(this).remove();
     })
 
-    function years(year) {
-        if (year % 4 === 0 && year % 100 != 0 || year % 400 === 0) {
-            feb.day = 29;
-            console.log(feb.day);
-            console.log(29);
+    $('#right').on("click", function() {
+        if (p < 11) {
+            p += 1;
         } else {
-            feb.day = 28;
-            console.log(feb.day);
-            console.log(28);
+            p = 0;
+            year += 1;
         }
-    }
-
-    var year = 2016;
-    var days = [];
-    for (var i = 1; i <= data.days[2]; i++) {
-      var stringparse = (data.months[2] + " " + i + " " + year).toString();
-      console.log(stringparse);
-      var dateparse = (Date.parse(stringparse));
-      var theDate = new Date(dateparse);
-      console.log(theDate);
-      console.log(theDate.getDay());
-      days.push(theDate.getDay());
-    }
-      console.log(days);
-
-
-
-      for (var i = 0; i < days.length; i++) {
-        if (days[i] === 0) {
-          console.log("Sunday");
-        }
-        else if (days[i] === 1) {
-          console.log("Monday");
-        }
-        else if (days[i] === 2) {
-          console.log("Tuesday");
-        }
-        else if (days[i] === 3) {
-          console.log("Wednesday");
-        }
-        else if (days[i] === 4) {
-          console.log("Thursday");
-        }
-        else if (days[i] === 5) {
-          console.log("Friday");
-        }
-        else if (days[i] === 6) {
-          console.log("Saturday");
+        console.log(p);
+        console.log(year);
+        $(".months").text(months[p] + " " + year);
+    });
+    $('#left').on("click", function() {
+        if (p > 0 && p < 12) {
+            p -= 1;
         } else {
-          return null;
+            p = 12;
+            p -= 1;
+            year -= 1;
         }
-      }
-
-
+        console.log(p)
+        console.log(year)
+        $(".months").text(months[p] + " " + year);
+    })
 
 
 
